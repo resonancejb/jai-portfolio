@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jai Bhardwaj — Software Engineer | AI & ML</title>
+    <style>
+        /* General Setup and Variables */
+        :root {
+            --background: #0a0c12;
+            --primary: #0f1419;
+            --secondary: #1c242f;
+            --teal: #14a3b8;
+            --teal-light: #73cdd1;
+            --purple: #581c87;
+            --text: #e5e7eb;
+            --text-light: #f3f4f6;
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.06);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--background);
+            background-image:
+                radial-gradient(circle at 12% 18%, rgba(217,119,6,0.28), transparent 30%),
+                radial-gradient(circle at 86% 28%, rgba(126,34,206,0.22), transparent 35%),
+                radial-gradient(circle at 50% 80%, rgba(20,163,184,0.22), transparent 40%);
+            background-attachment: fixed;
+            background-position: 0% 100%; /* Initial position for JS animation */
+            color: var(--text-light);
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header and Navbar */
+        .header {
+            position: sticky;
+            top: 1rem;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .nav-glass {
+            background: rgba(10, 12, 18, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 9999px;
+            height: 3.5rem;
+            transition: opacity 300ms ease-in-out;
+        }
+
+        .nav-name {
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+        .nav-name a {
+            color: var(--text);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 300ms;
+        }
+
+        .nav-name a:hover {
+            color: var(--teal);
+        }
+
+        /* Default (Mobile) Navigation Styles */
+        .nav-links {
+            display: none; 
+        }
+
+        .social-links {
+            display: none;
+        }
+
+        .hamburger {
+            display: flex; /* Visible on mobile */
+            flex-direction: column;
+            justify-content: space-around;
+            width: 2rem;
+            height: 2rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 60;
+            margin-left: 0.75rem;
+        }
+
+        .hamburger div {
+            width: 2rem;
+            height: 0.25rem;
+            background: var(--text-light);
+            border-radius: 10px;
+            transition: all 0.3s linear;
+            position: relative;
+            transform-origin: 1px;
+        }
+
+        /* Mobile Menu Container */
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            background: rgba(10, 12, 18, 0.98);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            height: 100vh;
+            text-align: center;
+            padding: 2rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(-100%);
+            width: 100%;
+            z-index: 55;
+        }
+
+        .mobile-nav.open {
+            transform: translateX(0);
+        }
+        
+        .mobile-nav button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-light);
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav button:hover {
+            color: var(--teal);
+        }
+        
+        .mobile-social-links {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+        
+        .mobile-social-links a {
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+        .social-links a:hover {
+    color: var(--teal);
+}
+
+
+        .mobile-social-links a:hover {
+            color: var(--teal);
+        }
+        
+        /* Tablet and Desktop Styles */
+        @media (min-width: 768px) {
+            .hamburger {
+                display: none; /* Hide hamburger on desktop */
+            }
+
+            .nav-links {
+                display: flex; /* Show desktop nav */
+                align-items: center;
+                gap: 0.5rem;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 0 0.75rem;
+            }
+
+            .social-links {
+                display: flex; /* Show desktop social links */
+                align-items: center;
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+            .social-links a {
+    color: rgba(243, 244, 246, 0.7); /* Updated subtle color */
+    transition: color 300ms;
+}
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 5rem;
+        }
+
+        .resume-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            background-color: rgba(5, 150, 137, 0.1);
+            color: #a5d8e0;
+            border: 1px solid rgba(20, 184, 166, 0.2);
+            cursor: pointer;
+            transition: background-color 300ms;
+            font-size: 1rem;
+        }
+
+        .resume-btn:hover {
+            background-color: rgba(5, 150, 137, 0.12);
+        }
+        
+        .divider {
+            height: 1.5rem;
+            width: 1px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-links button, .nav-links a {
+            position: relative;
+            padding: 0.5rem 1rem;
+            color: var(--text-light);
+            background: none;
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: color 300ms;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .nav-links button:hover, .nav-links a:hover {
+            color: var(--teal);
+        }
+        
+        .nav-links .active-pill {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 9999px;
+            z-index: -1;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 14rem;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 2rem;
+            min-height: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .greeting {
+            transition: opacity 0.4s ease;
+        }
+        .greeting.fade-out {
+            opacity: 0;
+        }
+        .hero p {
+            font-size: clamp(1.125rem, 3vw, 1.25rem);
+            color: var(--text-light);
+            max-width: 48rem;
+            margin: 0 auto 2rem;
+            min-height: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .typing-text {
+            position: relative;
+        }
+        .typing-cursor {
+            position: absolute;
+            right: -4px;
+            top: 0;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Generic Section Styles */
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        /* Projects Section */
+        #projects {
+            padding-top: 6rem;
+        }
+        
+        .projects-grid {
+            max-width: 56rem;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            perspective: 1000px;
+        }
+
+        @media (min-width: 768px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .project-card {
+            position: relative;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+            transition: all 300ms;
+            aspect-ratio: 16 / 9;
+            opacity: 0; /* Initially hidden for animation */
+            transform: scale(0.9);
+            cursor: pointer;
+            border: none;
+            padding: 0;
+            background: var(--primary);
+        }
+        
+        .project-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.1);
+            transform: translateY(-0.25rem) scale(1.0);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 300ms;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .project-card .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.4), transparent);
+        }
+
+        .project-card .content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            text-align: left;
+        }
+        
+        .project-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: white;
+        }
+        
+        .project-card p {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+        }
+        
+        /* Experience Section */
+        .experience-container {
+            position: relative;
+            max-width: 42rem;
+            margin: 0 auto;
+        }
+
+        .experience-timeline {
+            position: absolute;
+            left: 1rem;
+            top: 0.5rem;
+            bottom: 0.5rem;
+            width: 2px;
+            background: linear-gradient(to bottom, rgba(20, 184, 166, 0.25), rgba(20, 184, 166, 0.15), rgba(20, 184, 166, 0.25));
+            transform: translateX(-50%);
+        }
+
+        .experience-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .experience-icon {
+            position: absolute;
+            left: 1rem;
+            top: 0.25rem;
+            transform: translateX(-50%);
+            width: 1.25rem;
+            height: 1.25rem;
+            background-color: var(--background);
+            border: 2px solid var(--teal);
+            border-radius: 9999px;
+            box-shadow: 0 0 8px rgba(20, 184, 166, 0.4);
+        }
+
+        .experience-card {
+            background: rgba(10, 12, 18, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .experience-card.placeholder {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+        
+        .experience-card.placeholder:hover {
+            border-color: rgba(20, 184, 166, 0.5);
+        }
+
+        .experience-card h3, .experience-role {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 0;
+        }
+        
+        .experience-card p, .experience-company, .experience-period {
+            margin: 0.25rem 0 0 0;
+        }
+        
+        .experience-company {
+            color: var(--text-light);
+        }
+        
+        .experience-period {
+            color: var(--teal-light);
+            font-size: 0.875rem;
+        }
+        
+        .experience-description {
+            margin-top: 1rem;
+            padding-left: 1.25rem;
+            list-style-type: disc;
+            color: var(--text-light);
+        }
+
+        .experience-description li + li {
+            margin-top: 0.5rem;
+        }
+
+        .arrow-icon {
+            width: 2rem;
+            height: 2rem;
+            color: rgba(115, 205, 209, 0.5);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .experience-card.placeholder:hover .arrow-icon {
+            color: var(--teal-light);
+            transform: translateX(4px);
+        }
+
+        /* Contact Section */
+        #contact {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #contact .glass-morphism {
+            max-width: 48rem;
+            margin: 0 auto;
+            text-align: center;
+            padding: 3rem;
+            border-radius: 1rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+        }
+
+        #contact p {
+            color: var(--text-light);
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+        }
+        
+        .contact-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .contact-links a {
+            padding: 1.5rem;
+            border-radius: 9999px;
+            background-color: rgba(10, 12, 18, 0.2);
+            transition: all 300ms;
+        }
+        
+        .contact-links a:hover {
+            background-color: rgba(5, 150, 137, 0.1);
+            transform: scale(1.1);
+        }
+        
+        .contact-links a svg {
+            color: rgba(243, 244, 246, 0.7);
+            transition: color 300ms;
+        }
+
+        .contact-links a:hover svg {
+            color: var(--teal-light);
+        }
+        
+        .contact-footer {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .contact-footer p {
+            color: rgba(243, 244, 246, 0.7);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        /* Resume Modal */
+        .resume-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(2,6,23,0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .resume-modal {
+            position: relative;
+            width: min(900px, 95%);
+            max-height: 90vh;
+            border-radius: 12px;
+            padding: 1.25rem;
+            background: linear-gradient(180deg, rgba(10,12,18,0.86), rgba(15,20,25,0.92));
+            border: 1px solid rgba(255,255,255,0.04);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        }
+
+        .resume-close-btn {
+            position: absolute;
+            right: 14px;
+            top: 12px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: #cfeef6;
+            font-size: 1.25rem;
+        }
+        
+        .resume-modal-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .resume-download-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            background-color: var(--teal);
+            color: white;
+            text-decoration: none;
+            transition: background-color 300ms;
+        }
+        .resume-download-btn:hover {
+            background-color: #3cb3c2;
+        }
+        
+        .resume-modal-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .resume-iframe-container {
+            width: 100%;
+            height: 75vh;
+            background-color: #1f2937;
+            border-radius: 0.375rem;
+        }
+        
+        .resume-iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Project Detail Modal */
+        .project-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(2,6,23,0.8);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9998;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+        .project-modal {
+            background: var(--background);
+            width: 100%;
+            max-width: 56rem;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        }
+        .project-modal::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .project-modal::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .project-modal::-webkit-scrollbar-thumb {
+            background-color: var(--secondary);
+            border-radius: 10px;
+            border: 2px solid var(--background);
+        }
+        .project-close-btn {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            background: transparent;
+            border: none;
+            color: #cfeef6;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .project-modal-content .gallery-grid img {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .project-modal-content .gallery-grid img:hover {
+            opacity: 0.8;
+        }
+
+        /* Lightbox styles */
+        .lightbox-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .lightbox-image {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .lightbox-close:hover {
+            color: #bbb;
+        }
+        
+        .project-modal-content h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-modal-content .tagline {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+        
+        .project-modal-content .main-image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .project-modal-content .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .project-modal-content .links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+        
+        .project-modal-content .links a.github {
+            background-color: #333;
+            color: white;
+        }
+        .project-modal-content .links a.github:hover {
+            background-color: #444;
+        }
+        
+        .project-modal-content .links a.demo {
+            background-color: var(--teal);
+            color: white;
+        }
+        .project-modal-content .links a.demo:hover {
+            background-color: #3cb3c2;
+        }
+        
+        .project-modal-content h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 0.5rem;
+        }
+
+        .project-modal-content .description,
+        .project-modal-content .features-list {
+            color: rgba(243, 244, 246, 0.8);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        
+        .project-modal-content .features-list {
+            list-style: disc;
+            padding-left: 1.5rem;
+        }
+        .project-modal-content .features-list li + li {
+            margin-top: 0.5rem;
+        }
+
+        .project-modal-content .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .project-modal-content .tech-stack span {
+            background-color: rgba(10, 12, 18, 0.5);
+            border: 1px solid var(--glass-border);
+            color: var(--teal);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        
+        .project-modal-content .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .project-modal-content .gallery-grid img {
+            width: 100%;
+            border-radius: 0.5rem;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <header class="header container" id="navbar">
+        <div class="nav-glass nav-name" id="nav-name">
+            <a href="#home">Jai Bhardwaj</a>
+        </div>
+        
+        <nav class="nav-glass nav-links">
+            <button data-target="projects">
+                <span class="nav-text">Projects</span>
+            </button>
+            <button data-target="experience">
+                <span class="nav-text">Experience</span>
+            </button>
+            <button data-target="contact">
+                <span class="nav-text">Contact</span>
+            </button>
+        </nav>
+        
+        <div class="nav-actions">
+            <button class="resume-btn" id="open-resume-btn">Resume</button>
+            <div class="nav-glass social-links" id="social-links">
+    <a href="https://github.com/resonancejb" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+    </a>
+    <div class="divider"></div>
+    <a href="https://www.linkedin.com/in/jai-bhardwaj-ab8a3124a" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+    </a>
+</div>
+            <button class="hamburger" id="hamburger-btn">
+                <div></div>
+                <div></div>
+                <div></div>
+            </button>
+        </div>
+    </header>
+
+    <div class="mobile-nav" id="mobile-nav">
+        <button data-target="projects">Projects</button>
+        <button data-target="experience">Experience</button>
+        <button data-target="contact">Contact</button>
+        <div class="mobile-social-links">
+            <a href="https://github.com/resonancejb" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/jai-bhardwaj-ab8a3124a" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+        </div>
+    </div>
+
+
+    <main>
+       <section id="home" class="hero">
+            <div class="container">
+                <h1 id="greeting-container"><span class="greeting">Hello</span></h1>
+                <p id="intro-container"><span class="typing-text"></span></p>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2 class="section-title animated-headline">Projects</h2>
+                <div class="projects-grid">
+                    <button class="project-card" data-slug="privachat">
+                        <img src="images/privachat.png" alt="PrivaChat">
+                        <div class="overlay"></div>
+                        <div class="content">
+                            <h3>PrivaChat</h3>
+                            <p>A private, local, multi-modal chat client for interacting with LLMs.</p>
+                       </div>
+                    </button>
+                    <button class="project-card" data-slug="fake-face-detection">
+                        <img src="images/fake.png" alt="Fake Face Detection">
+                        <div class="overlay"></div>
+                        <div class="content">
+                            <h3>Fake Face Detection</h3>
+                            <p>A deep learning model that classifies real vs. fake faces with 98.7% accuracy.</p>
+                        </div>
+                    </button>
+                    <button class="project-card" data-slug="quizcraft">
+                        <img src="images/quizcraft.png" alt="QuizCraft">
+                        <div class="overlay"></div>
+                        <div class="content">
+                            <h3>QuizCraft</h3>
+                            <p>An NLP tool that automatically generates Multiple Choice Questions (MCQs) from documents.</p>
+                        </div>
+                    </button>
+                    <button class="project-card" data-slug="movie-recommender">
+                        <img src="images/movie.png" alt="Movie Recommendation System">
+                        <div class="overlay"></div>
+                        <div class="content">
+                            <h3>Movie Recommendation System</h3>
+                            <p>An NLP-based model that recommends movies by calculating cosine similarity.</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="container">
+                <h2 class="section-title animated-headline">My Professional Journey</h2>
+                <div class="experience-container">
+                    <div class="experience-timeline"></div>
+                    
+                    <div class="experience-item" data-delay="0">
+                        <div class="experience-icon"></div>
+                        <div class="experience-card placeholder" onclick="scrollToContact()">
+                            <div>
+                                <h3 class="experience-role">Your Company Name Here</h3>
+                                <p class="experience-company">Curious how it would look? Let's find out.</p>
+                                <p class="experience-period">The Future</p>
+                            </div>
+                            <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="experience-item" data-delay="200">
+                        <div class="experience-icon"></div>
+                        <div class="experience-card">
+                            <h3 class="experience-role">Software Engineer Intern</h3>
+                            <p class="experience-company">Jai Kisan</p>
+                            <p class="experience-period">Mar 2025 - Sep 2025</p>
+                           <ul class="experience-description">
+                                <li>Built and maintained scalable backend APIs and asynchronous processing pipelines to support document automation and user-facing features.</li>
+                                <li>Developed OCR and document-understanding workflows that feed structured data into LLM-based inference and chatbot systems for intelligent document analysis.</li>
+                                <li>Collaborated cross-functionally with frontend and product teams to design clear API contracts, improve integration quality, and accelerate feature delivery.</li>
+                           </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <div class="glass-morphism">
+                    <h2 class="section-title">Let's Connect</h2>
+                    <p>Feel free to reach out — I'm always open to discussing new opportunities, collaborations, or just having a chat about technology.</p>
+                    <div class="contact-links">
+                        <a href="https://github.com/resonancejb" target="_blank" rel="noreferrer" aria-label="GitHub">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/jai-bhardwaj-ab8a3124a" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        </a>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=jaib25007@gmail.com" aria-label="Email">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><polyline points="22,6 12,13 2,6"></polyline></svg>
+</a>
+                    </div>
+                    <div class="contact-footer">
+                        <p>Available for full-time opportunities in AI/ML roles.</p>
+                    </div>
+                </div>
+            </div>
+         </section>
+    </main>
+    
+    <div class="resume-modal-overlay" id="resume-modal-overlay">
+        <div class="resume-modal">
+            <button class="resume-close-btn" id="close-resume-btn">&times;</button>
+            <div class="resume-modal-header">
+                <a href="cvjai.pdf" download="Jai_Bhardwaj_Resume.pdf" class="resume-download-btn">Download</a>
+                <h2>My Resume</h2>
+            </div>
+            <div class="resume-iframe-container">
+                <iframe src="cvjai.pdf" title="Resume Preview"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="project-modal-overlay" id="project-modal-overlay">
+        <div class="project-modal" id="project-modal">
+             <button class="project-close-btn" id="project-close-btn">&times;</button>
+             <div class="project-modal-content" id="project-modal-content">
+                </div>
+        </div>
+    </div>
+
+    <div class="lightbox-overlay" id="lightbox-overlay">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <img class="lightbox-image" id="lightbox-image" src="" alt="Image Preview">
+    </div>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // --- PROJECT DATA ---
+        const projectsData = [
+          {
+            title: "PrivaChat",
+            slug: "privachat",
+            tagline: "A private, local, multi-modal chat client for interacting with LLMs.",
+            description: "PrivaChat is a desktop application built with Python and PyQt6 that provides a secure, user-friendly interface for chatting with Large Language Models. It prioritizes user privacy by storing all chat history and API keys locally.",
+            keyFeatures: [
+              "Intuitive chat interface with streaming responses.",
+              "Multi-modal input (images, PDFs, text files) and clipboard pasting.",
+              "Private and secure local storage of chat history and API keys.",
+              "Full chat management: create, switch, and delete local sessions.",
+              "Code block rendering with a copy button."
+            ],
+            techStack: ["Python", "PyQt6", "OpenAI API", "SQLite", "Pillow", "PyMuPDF"],
+            imageUrl: "images/privachat.png",
+            galleryImages: ["images/p4.png"],
+            githubLink: "https://github.com/resonancejb/privachat",
+            liveDemoLink: null
+          },
+          {
+            title: "Fake Face Detection",
+            slug: "fake-face-detection",
+            tagline: "A deep learning model that classifies real vs. fake faces with 98.7% accuracy.",
+            description: "This project uses a fine-tuned DenseNet121 architecture to build a highly accurate binary classifier for detecting manipulated or AI-generated facial images. It is accessible for real-time predictions through a Streamlit web app.",
+            keyFeatures: [
+              "Achieves 98.7% accuracy on the test dataset.",
+              "Built on the DenseNet121 backbone, pre-trained on ImageNet.",
+              "Interactive Streamlit app for easy real-time predictions.",
+              "Supports both image uploads and URL inputs."
+            ],
+            techStack: ["Python", "TensorFlow", "Keras", "Streamlit", "OpenCV"],
+            imageUrl: "images/fake.png",
+            galleryImages: ["images/p1.png", "images/p1.1.png", "images/p1.2.png" , "images/p1.3.png"],
+            githubLink: "https://github.com/resonancejb/Fake-image-detection-model",
+            liveDemoLink: null
+          },
+          {
+            title: "QuizCraft",
+            slug: "quizcraft",
+            tagline: "An NLP tool that automatically generates Multiple Choice Questions (MCQs) from documents.",
+            description: "QuizCraft is a Python-based tool that leverages the spaCy library to analyze text from various documents and automate the creation of MCQs. It processes the input to extract key information and formulates relevant questions, significantly speeding up the process for educators.",
+            keyFeatures: [
+              "Accepts both plain text and PDF files as input.",
+              "Uses spaCy for advanced text preprocessing and entity recognition.",
+              "Generates questions based on extracted information.",
+              "Designed for efficient and accurate educational assessment creation."
+            ],
+            techStack: ["Python", "spaCy", "PyMuPDF"],
+            imageUrl: "images/quizcraft.png",
+            galleryImages: ["images/p3.1.png","/images/p3.2.png"],
+            githubLink: "https://github.com/resonancejb/Quizcraft",
+            liveDemoLink: null
+          },
+          {
+            title: "Movie Recommendation System",
+            slug: "movie-recommender",
+            tagline: "An NLP-based model that recommends movies by calculating cosine similarity.",
+            description: "This project provides a content-based movie recommendation system. By converting movie features like plot summaries into numerical vectors, the model can measure the similarity between movies and return a ranked list of the most similar films.",
+            keyFeatures: [
+               "Uses textual movie features for recommendations.",
+              "Calculates similarity using the cosine similarity metric.",
+              "Accepts a user's movie query to generate personalized recommendations."
+            ],
+            techStack: ["Python", "scikit-learn", "Pandas", "NumPy", "NLTK"],
+            imageUrl: "images/movie.png",
+            galleryImages: ["images/p2.png"],
+            githubLink: "https://github.com/resonancejb/Movies_recommender_model",
+            liveDemoLink: null
+          }
+        ];
+        
+
+        // --- ANIMATIONS & INTERACTIVITY ---
+
+        // Mobile Navigation
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+        hamburgerBtn.addEventListener('click', () => {
+            const isOpen = mobileNav.classList.toggle('open');
+            document.body.classList.toggle('no-scroll', isOpen);
+        });
+
+        mobileNav.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                mobileNav.classList.remove('open');
+                document.body.classList.remove('no-scroll');
+                const targetId = e.target.dataset.target;
+                const scrollSpeed = 1000;
+                if (targetId === 'contact') {
+                    smoothScrollTo(targetId, scrollSpeed, -50);
+                } else {
+                    smoothScrollTo(targetId, scrollSpeed);
+                }
+            }
+        });
+
+
+        // Animated Gradient on Scroll
+        function handleScrollGradient() {
+            const scrollYProgress = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+            const xPos = scrollYProgress * 100;
+            const yPos = scrollYProgress <= 0.5 
+                ? 100 - (scrollYProgress * 2 * 50) 
+                : 50 + ((scrollYProgress - 0.5) * 2 * 50);
+            document.body.style.backgroundPosition = `${xPos}% ${yPos}%`;
+        }
+
+        // Image Lightbox Logic
+        const lightboxOverlay = document.getElementById('lightbox-overlay');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const lightboxCloseBtn = document.getElementById('lightbox-close');
+        const projectModalContent = document.getElementById('project-modal-content');
+
+        if (lightboxOverlay && lightboxImage && lightboxCloseBtn && projectModalContent) {
+            projectModalContent.addEventListener('click', function(e) {
+                if (e.target.tagName === 'IMG' && e.target.closest('.gallery-grid')) {
+                    lightboxImage.src = e.target.src;
+                    lightboxOverlay.style.display = 'flex';
+                }
+            });
+            const closeLightbox = () => {
+                lightboxOverlay.style.display = 'none';
+            };
+            lightboxCloseBtn.addEventListener('click', closeLightbox);
+            lightboxOverlay.addEventListener('click', function(e) {
+                if (e.target === lightboxOverlay) {
+                    closeLightbox();
+                }
+            });
+        }
+        
+        // Helper function to scroll to contact section
+        function scrollToContact() {
+            smoothScrollTo('contact', 1000, -50);
+        }
+        window.scrollToContact = scrollToContact;
+        
+        // Hero Section Animations
+        const greetings = ['Hello', 'नमस्ते', 'Hola', 'Bonjour', 'Hallo', '你好', 'こんにちは', 'Привет', 'Olá', 'مرحبا'];
+        const fullIntro = 'Hi, my name is Jai. I’m a softwre engineer specializing in artificial intelligence and machine learning systems. I build scalable backend APIs, asynchronous pipelines, OCR and document-understanding workflows, and LLM inference/chatbot integrations. I’ve interned at Jai Kisan developing production-grade document automation and API contracts. My projects include a movie recommender using NLP and cosine similarity, QuizCraft — an NLP tool (spaCy) that auto-generates MCQs from text/PDFs, and a fake-face detector fine-tuned on DenseNet121 and deployed with Streamlit. I’m fluent in C, Java, Python, SQL, TypeScript, Next.js, FastAPI, TensorFlow/Keras, OpenCV, and skilled in prompt engineering and model deployment. I focus on clean APIs and iteration.';
+        
+        const greetingEl = document.querySelector('#greeting-container .greeting');
+        const introTextEl = document.querySelector('#intro-container .typing-text');
+        let currentGreetingIndex = 0;
+
+        function cycleGreetings() {
+            greetingEl.classList.add('fade-out');
+            setTimeout(() => {
+                currentGreetingIndex = (currentGreetingIndex + 1) % greetings.length;
+                greetingEl.textContent = greetings[currentGreetingIndex];
+                greetingEl.classList.remove('fade-out');
+            }, 400);
+        }
+
+        function typeIntro() {
+            let i = 0;
+            introTextEl.innerHTML = ''; // Clear content
+            const cursor = document.createElement('span');
+            cursor.className = 'typing-cursor';
+            cursor.textContent = '|';
+            introTextEl.appendChild(cursor);
+
+            function type() {
+                if (i < fullIntro.length) {
+                    introTextEl.insertBefore(document.createTextNode(fullIntro.charAt(i)), cursor);
+                    i++;
+                    setTimeout(type, 50);
+                } else {
+                    cursor.remove();
+                }
+            }
+            type();
+        }
+        
+        setInterval(cycleGreetings, 3000);
+        setTimeout(typeIntro, 1000);
+
+        // Navbar Logic & Smooth Scrolling
+        const navLinks = document.querySelector('.nav-links');
+        const sections = document.querySelectorAll('main > section');
+        const navName = document.getElementById('nav-name');
+        const socialLinks = document.getElementById('social-links');
+        
+        let activePill = null;
+        function updateActiveLink() {
+            let currentSection = 'home';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - window.innerHeight / 2;
+                if (window.scrollY >= sectionTop) {
+                    currentSection = section.id;
+                }
+            });
+            navLinks.querySelectorAll('button').forEach(btn => {
+                if (btn.dataset.target === currentSection) {
+                    if (!btn.querySelector('.active-pill')) {
+                        if(activePill) activePill.remove();
+                        const pill = document.createElement('div');
+                        pill.className = 'active-pill';
+                        btn.style.position = 'relative';
+                        btn.insertBefore(pill, btn.firstChild);
+                        activePill = pill;
+                    }
+                } else {
+                     const pill = btn.querySelector('.active-pill');
+                     if(pill) pill.remove();
+                }
+            });
+            
+            navName.style.opacity = currentSection === 'home' ? '0' : '1';
+            
+            // Ensure social links are only affected on desktop
+            if (window.innerWidth >= 768) {
+                socialLinks.style.opacity = currentSection === 'contact' ? '0' : '1';
+            }
+        }
+        
+        const smoothScrollTo = (targetId, duration = 800, offset = 0) => {
+            const targetElement = document.getElementById(targetId);
+            if (!targetElement) return;
+
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+            const startPosition = window.pageYOffset;
+            const distance = targetPosition - startPosition;
+            let startTime = null;
+            const ease = (t, b, c, d) => {
+                t /= d / 2;
+                if (t < 1) return c / 2 * t * t + b;
+                t--;
+                return -c / 2 * (t * (t - 2) - 1) + b;
+            };
+            const animation = currentTime => {
+                if (startTime === null) startTime = currentTime;
+                const timeElapsed = currentTime - startTime;
+                const run = ease(timeElapsed, startPosition, distance, duration);
+                window.scrollTo(0, run);
+                if (timeElapsed < duration) requestAnimationFrame(animation);
+            };
+
+            requestAnimationFrame(animation);
+        };
+
+        navLinks.addEventListener('click', function(e) {
+            const button = e.target.closest('button');
+            if (button) {
+                const targetId = button.dataset.target;
+                const scrollSpeed = 1000;
+                if (targetId === 'contact') {
+                    const contactOffset = -50;
+                    smoothScrollTo(targetId, scrollSpeed, contactOffset);
+                } else {
+                    smoothScrollTo(targetId, scrollSpeed); 
+                }
+            }
+        });
+
+        // Scroll-Triggered Animations for Sections
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const headline = entry.target.querySelector('.animated-headline, .section-title');
+                    if (headline) {
+                        headline.style.opacity = '1';
+                        headline.style.transform = 'translateY(0)';
+                    }
+                    if (entry.target.id === 'projects') {
+                        entry.target.querySelectorAll('.project-card').forEach((card, index) => {
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'scale(1)';
+                                card.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+                            }, 100);
+                        });
+                    }
+                    if (entry.target.id === 'experience') {
+                        entry.target.querySelectorAll('.experience-item').forEach((item) => {
+                            const delay = parseInt(item.dataset.delay) || 0;
+                           setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateY(0)';
+                            }, delay);
+                        });
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+        const sectionObserver = new IntersectionObserver(observerCallback, observerOptions);
+        document.querySelectorAll('#projects, #experience').forEach(section => {
+            const headline = section.querySelector('.animated-headline, .section-title');
+            if (headline) {
+                headline.style.opacity = '0';
+                headline.style.transform = 'translateY(50px)';
+                headline.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            }
+            sectionObserver.observe(section);
+        });
+
+        // Resume Modal Logic
+        const resumeModalOverlay = document.getElementById('resume-modal-overlay');
+        const openResumeBtn = document.getElementById('open-resume-btn');
+        const closeResumeBtn = document.getElementById('close-resume-btn');
+
+        openResumeBtn.addEventListener('click', () => {
+            resumeModalOverlay.style.display = 'flex';
+        });
+        function closeResumeModal() { resumeModalOverlay.style.display = 'none'; }
+        closeResumeBtn.addEventListener('click', closeResumeModal);
+        resumeModalOverlay.addEventListener('click', (e) => {
+            if (e.target === resumeModalOverlay) closeResumeModal();
+        });
+
+        // Project Detail Modal Logic
+        const projectModalOverlay = document.getElementById('project-modal-overlay');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        projectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const slug = card.dataset.slug;
+                const project = projectsData.find(p => p.slug === slug);
+                if (project) {
+                    openProjectModal(project);
+                }
+            });
+        });
+
+        function openProjectModal(project) {
+            let linksHTML = '';
+            if (project.githubLink) {
+                linksHTML += `<a href="${project.githubLink}" target="_blank" rel="noopener noreferrer" class="github">View on GitHub</a>`;
+            }
+            if (project.liveDemoLink) {
+                linksHTML += `<a href="${project.liveDemoLink}" target="_blank" rel="noopener noreferrer" class="demo">Live Demo</a>`;
+            }
+
+            const techStackHTML = project.techStack.map(tech => `<span>${tech}</span>`).join('');
+            const keyFeaturesHTML = project.keyFeatures.map(feature => `<li>${feature}</li>`).join('');
+            const galleryHTML = project.galleryImages.map(img => `<img src="${img}" alt="${project.title} gallery image">`).join('');
+            projectModalContent.innerHTML = `
+                <h1>${project.title}</h1>
+                <p class="tagline">${project.tagline}</p>
+                <img src="${project.imageUrl}" alt="${project.title}" class="main-image">
+                <div class="links">${linksHTML}</div>
+                <h2>Overview</h2>
+                <p class="description">${project.description}</p>
+                <h2>Key Features</h2>
+                <ul class="features-list">${keyFeaturesHTML}</ul>
+                <h2>Tech Stack</h2>
+                <div class="tech-stack">${techStackHTML}</div>
+                ${project.galleryImages.length > 0 ? `<h2>Gallery</h2><div class="gallery-grid">${galleryHTML}</div>` : ''}
+            `;
+            projectModalOverlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProjectModal() {
+            projectModalOverlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('project-close-btn').addEventListener('click', closeProjectModal);
+        projectModalOverlay.addEventListener('click', (e) => {
+            if (e.target === projectModalOverlay) closeProjectModal();
+        });
+
+        // Initial calls and event listeners
+        window.addEventListener('scroll', () => {
+            handleScrollGradient();
+            updateActiveLink();
+        });
+        updateActiveLink();
+    });
+    </script>
+</body>
+</html>
