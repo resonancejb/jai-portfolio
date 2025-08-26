@@ -1089,7 +1089,7 @@
             ],
             techStack: ["Python", "spaCy", "PyMuPDF"],
             imageUrl: "images/quizcraft.png",
-            galleryImages: ["images/p3.1.png","/images/p3.2.png"],
+            galleryImages: ["images/p3.1.png","images/p3.2.png"],
             githubLink: "https://github.com/resonancejb/Quizcraft",
             liveDemoLink: null
           },
@@ -1137,15 +1137,43 @@
         });
 
 
-        // Animated Gradient on Scroll
-        function handleScrollGradient() {
-            const scrollYProgress = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-            const xPos = scrollYProgress * 100;
-            const yPos = scrollYProgress <= 0.5 
-                ? 100 - (scrollYProgress * 2 * 50) 
-                : 50 + ((scrollYProgress - 0.5) * 2 * 50);
-            document.body.style.backgroundPosition = `${xPos}% ${yPos}%`;
+        // Animated Gradient with Circular Motion
+        function animateGradients() {
+            let angle = 0;
+            const centerX = 50;
+            const centerY = 50;
+            const radius = 30;
+
+            function animate() {
+                // Calculate positions for each gradient based on angle
+                const pos1 = {
+                    x: centerX + radius * Math.cos(angle),
+                    y: centerY + radius * Math.sin(angle)
+                };
+                const pos2 = {
+                    x: centerX + radius * Math.cos(angle + (2 * Math.PI / 3)),
+                    y: centerY + radius * Math.sin(angle + (2 * Math.PI / 3))
+                };
+                const pos3 = {
+                    x: centerX + radius * Math.cos(angle + (4 * Math.PI / 3)),
+                    y: centerY + radius * Math.sin(angle + (4 * Math.PI / 3))
+                };
+
+                document.body.style.backgroundImage = `
+                    radial-gradient(circle at ${pos1.x}% ${pos1.y}%, rgba(217,119,6,0.28) 0%, transparent 30%),
+                    radial-gradient(circle at ${pos2.x}% ${pos2.y}%, rgba(126,34,206,0.22) 0%, transparent 35%),
+                    radial-gradient(circle at ${pos3.x}% ${pos3.y}%, rgba(20,163,184,0.22) 0%, transparent 40%)
+                `;
+
+                angle += 0.002; // Adjust speed of rotation
+                requestAnimationFrame(animate);
+            }
+
+            animate();
         }
+
+        // Start the gradient animation
+        animateGradients();
 
         // Image Lightbox Logic
         const lightboxOverlay = document.getElementById('lightbox-overlay');
@@ -1407,7 +1435,6 @@
 
         // Initial calls and event listeners
         window.addEventListener('scroll', () => {
-            handleScrollGradient();
             updateActiveLink();
         });
         updateActiveLink();
